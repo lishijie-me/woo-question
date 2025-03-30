@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>待办页面</title>
+  <!-- 保持样式一致 -->
+  <style>
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    .btn {
+      padding: 10px 20px;
+      background: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>这是另一个页面</h1>
+  <p>来源页面：<span th:text="${source}" class="highlight"></span></p>
+  <a th:href="@{/}" class="btn">返回首页</a>
+</div>
+</body>
+</html>

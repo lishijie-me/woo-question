@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <title>API 请求示例</title>
+  <style>
+    .container {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+    #result {
+      margin-top: 10px;
+      padding: 10px;
+      background: #f8f6f6;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <button onclick="getData()">GET 请求</button>
+  <button onclick="postData()">POST 请求</button>
+  <div id="result">等待请求...</div>
+</div>
+
+<script>
+  // 后端接口地址
+  const API_URL = '/api/data';
+
+  // 处理 GET 请求
+  async function getData() {
+    showLoading();
+    try {
+      const response = await fetch(API_URL);
+      handleResponse(response);
+    } catch (error) {
+      showError(error);
+    }
+  }
+
+  // 处理 POST 请求
+  async function postData() {
+    showLoading();
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: 'test',
+          value: 123
+        })
+      });
+      handleResponse(response);
+    } catch (error) {
+      showError(error);
+    }
+  }
+
+  // 处理响应
+  async function handleResponse(response) {
+    if (!response.ok) {
+      throw new Error(`HTTP 错误: ${response.status}`);
+    }
+    const data = await response.json();
+    showResult(data);
+  }
+
+  // 显示加载状态
+  function showLoading() {
+    document.getElementById('result').textContent = '加载中...';
+  }
+
+  // 显示结果
+  function showResult(data) {
+    document.getElementById('result').innerHTML = `
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+  }
+
+  // 显示错误
+  function showError(error) {
+    document.getElementById('result').innerHTML = `
+                <span style="color: red">错误: ${error.message}</span>
+            `;
+  }
+</script>
+</body>
+</html>
