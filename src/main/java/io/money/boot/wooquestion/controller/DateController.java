@@ -54,7 +54,7 @@ public class DateController {
         model.addAttribute("isWeekend", isWeekend);
 
         // 本年第几周
-        WeekFields weekFields = WeekFields.of(Locale.CHINA);
+        WeekFields weekFields = WeekFields.of(DayOfWeek.MONDAY, 4);
         int weekNumber = now.get(weekFields.weekOfWeekBasedYear());
         // 本年的第几天
         int dayOfYear = now.getDayOfYear();
